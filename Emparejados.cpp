@@ -50,9 +50,7 @@ int main(int argc, char const *argv[]) {
 		for (int i = 0; i < Alength; ++i) cout << i + 1 << ". " << A[i] << endl;
 		cout << "Columna \"B\"" << endl;
 		for (int i = 0; i < Blength; ++i) cout << i + 1 << ". " << B[i] << endl;
-		double Prom;
-		int Intentos = 0;
-		int IntentosAcertados = 0;
+		float Prom, Intentos = 0.0, IntentosAcertados = 0.0;
 		while (true) {
 			cout << "s/n";
 			cin >> Res;
@@ -63,8 +61,9 @@ int main(int argc, char const *argv[]) {
 				Coord[2] -= 1;
 				Intentos += 1;
 				for (int i = 0; i < Pareados.size(); ++i) {
-					if (strcmp(Coord, Coord)) {
+					if (Coord[0] == Pareados[i][0] && Coord[2] == Pareados[i][2]) {
 						IntentosAcertados += 1;
+						cout << "Correto" << endl;
 						break;
 					}
 				}
@@ -73,7 +72,7 @@ int main(int argc, char const *argv[]) {
 			}
 		}
 		Prom = IntentosAcertados / Intentos;
-		Prom *= 100;
+		Prom = Prom * 100;
 		cout << Prom << '%' << endl;
 		for (int i = 0; i < Alength; ++i) {
 			delete[] A[i];
@@ -83,9 +82,15 @@ int main(int argc, char const *argv[]) {
 			delete[] B[i];
 		}
 		delete[] B;
-		for (int i = Pareados.size() - 1; i >= 0; ++i) {
-			delete[] Pareados[i];
+		for (int i = 0; i < Pareados.size(); ++i) {
 			Pareados.pop_back();
+		}
+		cout << "Desea Continuar [s/n]: ";
+		cin >> Res;
+		if (Res == 's' || Res == 'S') {
+			cout << "Bienvenido" << endl;
+		} else {
+			break;
 		}
 	} while (true);
 	return 0;
